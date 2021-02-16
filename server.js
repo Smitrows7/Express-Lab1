@@ -3,12 +3,13 @@ const express = require("express");
 const cart = require("./itemCart");
 // creates an instance of an Express server
 const app = express();
-const bodyParser = require('body-parser');
+
+//const bodyParser = require('body-parser');
 
 //allows us to use query strings params,path params, and body all in the req object
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(require('connect').bodyParser());
 
 app.use("/item-cart",cart);

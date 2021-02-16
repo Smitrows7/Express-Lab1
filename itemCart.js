@@ -96,26 +96,36 @@ const itemsList = [
     
     // accept PUT request at URI: /students
     items.put("/:id", (req, res) => {
-      
-      const id = parseint(req.params.id);
-      console.log("id:",id);
+      const idInp = (req.params.id);
+      console.log("id:",idInp);
       //find the item to update from itemsList array
-      const index = itemsList.findIndex( (i)=> i.id === id);
+      const index = itemsList.findIndex( (i)=> { return i.id === idInp});
+      console.log("index:",index);
       const item = itemsList[index];
+      console.log("item:",item);
       //get item from body
-      const newItem = req.body; 
+      const newItem = req.body;
+      console.log('newItem:',newItem);
+       
       //removes 1 item from the array, starting at the index provided,
       // then adds newItem in its place
-      // students.splice(index, 1, newStudent);
       itemsList.splice(index,1,newItem);
       res.json(itemsList);
+      res.status(200).send('PUT Successful');
+      //res.json(itemsList);
     });
     
-    // accept DELETE request at URI: /students
-    /*teachers.delete("/", (req, res) => {
-      // students.splice(index, 1);
-      res.json("Deleting a teacher..");
-    });*/
+    // accept DELETE request at URI: /items
+    items.delete("/:id", (req, res) => {
+      const idDel = (req.params.id);
+      console.log("id:",idDel);
+      //find the item to update from itemsList array
+      const index = itemsList.findIndex( (i)=> { return i.id === idDel});
+      console.log("index:",index);
+      itemsList.splice(index, 1);
+      res.status(204);
+      res.json("Delete Successful..");
+    });
     
     
     //export module so it can be used in other files
